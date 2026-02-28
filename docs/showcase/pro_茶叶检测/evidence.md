@@ -16,7 +16,7 @@
 ## 一键运行命令
 
 ```powershell
-cd pro_茶叶检测
+cd ywtbuilder-teavision-yolo-detection
 .\start_all_services.bat
 ```
 
@@ -56,4 +56,5 @@ cd pro_茶叶检测
 
 **Q5：如何将当前项目迁移到在线推理服务？**
 > Service 层加模型版本管理（MLflow / 自研）；Controller 层加 API Key 鉴权；用 Gunicorn + uvicorn workers 替换单进程；模型文件迁到对象存储（S3 / OSS）热加载。
+
 

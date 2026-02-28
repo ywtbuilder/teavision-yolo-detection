@@ -105,7 +105,7 @@
 
 ```bash
 git clone <仓库地址>
-cd pro_茶叶检测
+cd ywtbuilder-teavision-yolo-detection
 ```
 
 ### 第二步：安装依赖
@@ -431,3 +431,4 @@ FastAPI 已在 `app.py` 中配置了 `CORSMiddleware`，允许所有来源。若
 - 感谢 [Ultralytics YOLOv11](https://github.com/ultralytics/ultralytics) 提供目标检测框架
 - 感谢 [FastAPI](https://fastapi.tiangolo.com) 提供高性能异步接口框架
 - 感谢 [Chart.js](https://www.chartjs.org) 提供前端数据可视化支持
+
