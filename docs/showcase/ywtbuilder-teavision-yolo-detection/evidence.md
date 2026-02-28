@@ -8,10 +8,10 @@
 
 | 资源 | 路径 | 说明 |
 |------|------|------|
-| 演示视频 | `docs/showcase/pro_茶叶检测/demo.mp4` | 建议镜头：上传图片 → 多模型对比 → 结果详情 → 训练曲线页 |
-| 截图 1 | `docs/showcase/pro_茶叶检测/shot-01.png` | 检测主界面（上传 + 推理结果 + 统计卡片） |
-| 截图 2 | `docs/showcase/pro_茶叶检测/shot-02.png` | 多模型同图对比（O/A/B/C/D 并排） |
-| 截图 3 | `docs/showcase/pro_茶叶检测/shot-03.png` | 训练指标看板（mAP/Loss 曲线、混淆矩阵） |
+| 演示视频 | `docs/showcase/ywtbuilder-teavision-yolo-detection/demo.mp4` | 建议镜头：上传图片 → 多模型对比 → 结果详情 → 训练曲线页 |
+| 截图 1 | `docs/showcase/ywtbuilder-teavision-yolo-detection/shot-01.png` | 检测主界面（上传 + 推理结果 + 统计卡片） |
+| 截图 2 | `docs/showcase/ywtbuilder-teavision-yolo-detection/shot-02.png` | 多模型同图对比（O/A/B/C/D 并排） |
+| 截图 3 | `docs/showcase/ywtbuilder-teavision-yolo-detection/shot-03.png` | 训练指标看板（mAP/Loss 曲线、混淆矩阵） |
 
 ## 一键运行命令
 
@@ -56,5 +56,6 @@ cd ywtbuilder-teavision-yolo-detection
 
 **Q5：如何将当前项目迁移到在线推理服务？**
 > Service 层加模型版本管理（MLflow / 自研）；Controller 层加 API Key 鉴权；用 Gunicorn + uvicorn workers 替换单进程；模型文件迁到对象存储（S3 / OSS）热加载。
+
 
 

@@ -29,23 +29,23 @@
 ## ✨ 项目展示
 
 <p align="center">
-  <video src="docs/showcase/pro_茶叶检测/demo.mp4" width="720" controls>
-    你的浏览器不支持 video 标签，<a href="docs/showcase/pro_茶叶检测/demo.mp4">点此下载视频</a>。
+  <video src="docs/showcase/ywtbuilder-teavision-yolo-detection/demo.mp4" width="720" controls>
+    你的浏览器不支持 video 标签，<a href="docs/showcase/ywtbuilder-teavision-yolo-detection/demo.mp4">点此下载视频</a>。
   </video>
 </p>
 
 <p align="center">
-  <img src="docs/showcase/pro_茶叶检测/shot-01.png" alt="检测主界面" width="720"/>
+  <img src="docs/showcase/ywtbuilder-teavision-yolo-detection/shot-01.png" alt="检测主界面" width="720"/>
 </p>
 <p align="center"><i>↑ 检测主界面：上传图片一键推理，左侧结果图高亮标注框 + 置信度，右侧列出各类别检出数量</i></p>
 
 <p align="center">
-  <img src="docs/showcase/pro_茶叶检测/shot-02.png" alt="多模型对比" width="720"/>
+  <img src="docs/showcase/ywtbuilder-teavision-yolo-detection/shot-02.png" alt="多模型对比" width="720"/>
 </p>
 <p align="center"><i>↑ 多模型对比：同一张茶叶图片同时交给 O/A/B/C/D 五个方案推理，并排展示精度与耗时差异</i></p>
 
 <p align="center">
-  <img src="docs/showcase/pro_茶叶检测/shot-03.png" alt="训练指标看板" width="720"/>
+  <img src="docs/showcase/ywtbuilder-teavision-yolo-detection/shot-03.png" alt="训练指标看板" width="720"/>
 </p>
 <p align="center"><i>↑ 训练指标看板：mAP/Loss 曲线、混淆矩阵、P-R 曲线一屏呈现，支持切换方案与规模</i></p>
 
@@ -136,7 +136,7 @@ cd frontend && python -m http.server 3000
 | API 文档（Swagger） | `http://localhost:8000/docs` |
 
 <p align="center">
-  <img src="docs/showcase/pro_茶叶检测/shot-01.png" alt="启动成功截图" width="700"/>
+  <img src="docs/showcase/ywtbuilder-teavision-yolo-detection/shot-01.png" alt="启动成功截图" width="700"/>
 </p>
 <p align="center"><i>↑ 看到此界面表示启动成功</i></p>
 
@@ -322,7 +322,7 @@ curl -X POST http://localhost:8000/api/detection/detect \
 ### 目录结构
 
 ```
-pro_茶叶检测/
+ywtbuilder-teavision-yolo-detection/
 ├── frontend/               # 前端源码（Vanilla JS）
 │   ├── index.html          # 入口页面
 │   ├── src/
@@ -431,4 +431,5 @@ FastAPI 已在 `app.py` 中配置了 `CORSMiddleware`，允许所有来源。若
 - 感谢 [Ultralytics YOLOv11](https://github.com/ultralytics/ultralytics) 提供目标检测框架
 - 感谢 [FastAPI](https://fastapi.tiangolo.com) 提供高性能异步接口框架
 - 感谢 [Chart.js](https://www.chartjs.org) 提供前端数据可视化支持
+
 
