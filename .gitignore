@@ -1,0 +1,92 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# =====================
+# YOLO / Deep Learning
+# =====================
+# Model weight files (large binaries — place manually in backend/models/)
+*.pt
+*.weights
+*.onnx
+*.tflite
+*.engine
+*.pth
+
+# Training batch sample images (large, auto-generated during training)
+backend/training_results/**/train_batch*.jpg
+backend/training_results/**/train_batch*.png
+backend/training_results/**/val_batch*.jpg
+backend/training_results/**/val_batch*.png
+
+# YOLO misc outputs
+runs/
+wandb/
+*.log
+
+# =====================
+# Database (runtime)
+# =====================
+# detections.db is auto-created on first launch — do not commit
+backend/dao/data/*.db
+backend/dao/data/*.sqlite
+backend/dao/data/*.sqlite3
+*.db
+*.sqlite
+*.sqlite3
+
+# =====================
+# Frontend
+# =====================
+frontend/node_modules/
+frontend/dist/
+frontend/.cache/
+# Imported / scraped thumbnail images (not part of source)
+frontend/static/tea/imported/
+
+# =====================
+# IDE & Editor
+# =====================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =====================
+# OS
+# =====================
+.DS_Store
+Thumbs.db
+*.bak
+
+# =====================
+# Environment & Secrets
+# =====================
+.env
+.env.local
+.env.*.local
+*.secret
+
+# =====================
+# Temporary files
+# =====================
+tmp/
+temp/
+temp_videos/
+*.tmp

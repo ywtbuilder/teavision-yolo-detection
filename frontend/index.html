@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="warm-earth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TeaVision V12 - 不确定性环境下的茶叶形态智能检测系统，基于 YOLO-TBD 架构的精准计算机视觉解决方案">
+    <title>TeaVision | 茶芽智识 - 茶叶形态智能检测系统</title>
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍃</text></svg>">
+
+    <!-- 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- 图标库 (Lucide Icons) -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Chart.js 数据可视化 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- 样式表 -->
+    <link rel="stylesheet" href="src/styles/design-system.css">
+    <link rel="stylesheet" href="src/styles/themes.css">
+    <link rel="stylesheet" href="src/styles/pages.css">
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="tv-navbar" id="navbar">
+        <div class="tv-navbar__inner">
+            <a href="#/" class="tv-navbar__brand">
+                <img src="assets/icons/校标.png" alt="合肥工业大学" style="height:36px;margin-right:10px;"
+                    class="tv-navbar__school-logo">
+                <div>
+                    <span class="tv-navbar__title">TEAVISION</span>
+                    <span class="tv-navbar__subtitle">智能视觉感知</span>
+                </div>
+            </a>
+
+            <!-- 桌面端导航链接 -->
+            <div class="tv-navbar__links" id="navLinks">
+                <a href="#/" class="tv-nav-link active" data-page="home">
+                    <i data-lucide="home" class="tv-nav-link__icon"></i>
+                    <span>首页</span>
+                </a>
+                <a href="#/detection" class="tv-nav-link" data-page="detection">
+                    <i data-lucide="scan-search" class="tv-nav-link__icon"></i>
+                    <span>检测引擎</span>
+                </a>
+                <a href="#/training" class="tv-nav-link" data-page="training">
+                    <i data-lucide="chart-line" class="tv-nav-link__icon"></i>
+                    <span>训练成果</span>
+                </a>
+                <a href="#/comparison" class="tv-nav-link" data-page="comparison">
+                    <i data-lucide="columns-3" class="tv-nav-link__icon"></i>
+                    <span>模型对比</span>
+                </a>
+                <a href="#/augmentation" class="tv-nav-link" data-page="augmentation">
+                    <i data-lucide="palette" class="tv-nav-link__icon"></i>
+                    <span>数据增强</span>
+                </a>
+                <a href="#/knowledge" class="tv-nav-link" data-page="knowledge">
+                    <i data-lucide="book-open" class="tv-nav-link__icon"></i>
+                    <span>茶叶档案</span>
+                </a>
+                <a href="#/statistics" class="tv-nav-link" data-page="statistics">
+                    <i data-lucide="bar-chart-3" class="tv-nav-link__icon"></i>
+                    <span>智能统计</span>
+                </a>
+            </div>
+
+            <!-- 移动端汉堡菜单按钮 -->
+            <button class="tv-navbar__hamburger" id="hamburgerBtn" aria-label="切换菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 移动端导航抽屉 -->
+    <div class="tv-drawer" id="mobileDrawer">
+        <div class="tv-drawer__overlay" id="drawerOverlay"></div>
+        <div class="tv-drawer__content">
+            <div class="tv-drawer__header">
+                <span class="tv-navbar__logo">🍃</span>
+                <span class="tv-navbar__title">TeaVision</span>
+            </div>
+            <div class="tv-drawer__links" id="drawerLinks">
+                <!-- 由 JS 动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区域（SPA 页面容器） -->
+    <main class="tv-main" id="app">
+        <!-- 页面内容由路由系统动态注入 -->
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="tv-footer">
+        <div class="tv-footer__inner">
+            <div class="tv-footer__brand">
+                <img src="assets/icons/校标.png" alt="合肥工业大学"
+                    style="height:28px;margin-right:8px;filter:brightness(0) invert(1);" class="tv-footer__school-logo">
+                <span>TeaVision | 茶芽智识</span>
+            </div>
+            <div class="tv-footer__links">
+                <a href="javascript:void(0)" onclick="window.open(CONFIG.API_BASE_URL + '/docs', '_blank')"
+                    class="tv-footer__link">API 文档</a>
+                <span class="tv-footer__separator">·</span>
+                <a href="https://github.com/ultralytics/ultralytics" class="tv-footer__link" target="_blank">GitHub</a>
+            </div>
+            <p class="tv-footer__copyright">
+                合肥工业大学 · 计算机与信息学院 · Powered by YOLO-TBD · <span id="systemInfo" style="opacity:0.8">Checking device...</span>
+            </p>
+            <p
+                style="color:var(--footer-text,#FAF8F5);font-size:0.8rem;margin-top:6px;letter-spacing:0.05em;opacity:0.85">
+                MADE BY 2022212171 杨文通
+            </p>
+        </div>
+    </footer>
+
+    <!-- 主题切换器（V10 色块预览样式） -->
+    <div class="theme-switcher" id="themeFab">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="切换主题">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+        </button>
+        <div class="theme-panel" id="themePanel">
+            <div class="theme-panel-header">
+                <span class="theme-panel-title">选择主题</span>
+                <button class="theme-panel-close" id="themePanelClose" aria-label="关闭">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="theme-grid" id="themeGrid">
+                <!-- 由 theme-controller.js 动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast 通知容器 -->
+    <div class="tv-toast-container" id="toastContainer"></div>
+
+    <!-- 核心脚本 (ES Modules) -->
+    <script src="src/config.js"></script>
+    <script src="src/hooks/utils.js"></script>
+    <script src="src/hooks/api.js"></script>
+    <script src="src/hooks/router.js"></script>
+    <script src="src/hooks/theme-controller.js"></script>
+    <script src="src/components/navbar.js"></script>
+    <script src="src/components/toast.js"></script>
+
+    <!-- 页面模块 -->
+    <script src="src/pages/home.js"></script>
+    <script src="src/pages/detection.js"></script>
+    <script src="src/pages/training.js"></script>
+    <script src="src/pages/comparison.js"></script>
+    <script src="src/pages/augmentation.js"></script>
+    <script src="src/pages/knowledge.js"></script>
+    <script src="src/pages/statistics.js"></script>
+
+    <!-- 应用入口 -->
+    <script src="src/app.js"></script>
+</body>
+
+</html>

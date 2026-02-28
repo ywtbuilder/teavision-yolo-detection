@@ -1,0 +1,74 @@
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
+# YOLO11-TBD: Tea Bud Detection model with TBAM and SCGC improvements
+# Based on paper: "YOLO-TBD: Tea Bud Detection with Triple-Branch Attention Mechanism
+# and Self-Correction Group Convolution" (Industrial Crops & Products 226, 2025)
+#
+# Improvements:
+# 1. Triple-Branch Attention Mechanism (TBAM) - enhances feature representation
+# 2. Self-Correction Group Convolution (SCGC) - enlarges receptive field
+# 3. Improved PAFPN - incorporates P2 low-level features for better texture/color info
+#
+# Usage:
+#   from ultralytics import YOLO
+#   model = YOLO('yolo11-tea.yaml')
+#   model.train(data='tea.yaml', epochs=150, imgsz=640)
+
+# Parameters
+nc: 80  # number of classes (modify to your tea bud classes, e.g., 1 for single class)
+scales:
+  # [depth, width, max_channels]
+  # YOLO-TBD-S (Small): comparable accuracy to YOLOv8-L with much lower params
+  s: [0.50, 0.50, 1024]
+  # YOLO-TBD-M (Medium): balanced performance
+  m: [0.50, 1.00, 512]
+  # YOLO-TBD-L (Large): state-of-the-art accuracy (mAP 87.04% on tea dataset)
+  l: [1.00, 1.00, 512]
+
+# YOLO11-TBD backbone with TBAM attention at each stage output
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, Conv, [64, 3, 2]]           # 0-P1/2
+  - [-1, 1, Conv, [128, 3, 2]]          # 1-P2/4   <- 低层特征，包含纹理/颜色信息
+  - [-1, 2, C3k2, [256, False, 0.25]]   # 2
+  - [-1, 1, TBAM, [256]]                # 3        <- TBAM 注意力
+  - [-1, 1, Conv, [256, 3, 2]]          # 4-P3/8
+  - [-1, 2, C2fTBAM, [512, False, 0.25]] # 5       <- C2fTBAM (SCGC + TBAM)
+  - [-1, 1, Conv, [512, 3, 2]]          # 6-P4/16
+  - [-1, 2, C2fTBAM, [512, True]]       # 7        <- C2fTBAM
+  - [-1, 1, Conv, [1024, 3, 2]]         # 8-P5/32
+  - [-1, 2, C2fTBAM, [1024, True]]      # 9        <- C2fTBAM
+  - [-1, 1, SPPF, [1024, 5]]            # 10
+  - [-1, 2, C2PSA, [1024]]              # 11
+
+# YOLO11-TBD head with improved PAFPN (incorporating P2 features)
+head:
+  # Top-down path
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 7], 1, Concat, [1]]           # cat backbone P4
+  - [-1, 2, C2fTBAM, [512, False]]      # 14
+
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 5], 1, Concat, [1]]           # cat backbone P3
+  - [-1, 2, C2fTBAM, [256, False]]      # 17 (P3/8-small)
+
+  # 改进: 融合 P2 低层特征 (纹理/颜色信息)
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 2], 1, Concat, [1]]           # cat backbone P2 (低层特征)
+  - [-1, 2, C3k2, [128, False]]         # 20 (P2/4-tiny) <- 新增检测层
+
+  # Bottom-up path
+  - [-1, 1, Conv, [128, 3, 2]]
+  - [[-1, 17], 1, Concat, [1]]          # cat head P3
+  - [-1, 2, C2fTBAM, [256, False]]      # 23 (P3/8-small)
+
+  - [-1, 1, Conv, [256, 3, 2]]
+  - [[-1, 14], 1, Concat, [1]]          # cat head P4
+  - [-1, 2, C2fTBAM, [512, False]]      # 26 (P4/16-medium)
+
+  - [-1, 1, Conv, [512, 3, 2]]
+  - [[-1, 11], 1, Concat, [1]]          # cat head P5
+  - [-1, 2, C2fTBAM, [1024, True]]      # 29 (P5/32-large)
+
+  # Detect head: P2, P3, P4, P5 (4-scale detection for small tea buds)
+  - [[20, 23, 26, 29], 1, Detect, [nc]] # Detect(P2, P3, P4, P5)

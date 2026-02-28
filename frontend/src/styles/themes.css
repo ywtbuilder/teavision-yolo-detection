@@ -1,0 +1,1262 @@
+/* ============================================
+   TeaVision V4 - Premium Theme System
+   Handcrafted Multi-Theme Experience
+   ============================================ */
+
+/* ================================================================
+   VARIABLE BRIDGE: design-system.css ↔ themes.css
+   design-system.css 的组件使用 --color-surface 等变量名，
+   而每个主题定义的是 --color-bg-card 等变量名。
+   此规则将两者桥接，确保深色主题正确生效。
+   ================================================================ */
+[data-theme] {
+    --color-surface:    var(--color-bg-card);
+    --color-bg-main:    var(--color-bg-light);
+    --color-text-light: var(--color-text-muted);
+}
+
+/* ================================================================
+   THEME 1: WARM EARTH (Default - 暖大地色)
+   温暖、自然、质朴的咖啡大地色系
+   ================================================================ */
+[data-theme="warm-earth"] {
+    /* Color Palette */
+    --color-primary: #2C2418;
+    --color-accent: #B8956A;
+    --color-bg-light: #FAF8F5;
+    --color-bg-card: #FFFFFF;
+    --color-bg-secondary: #F5F2ED;
+    --color-secondary: #4A403A;
+    --color-tertiary: #8B7355;
+    --color-text: #2C2418;
+    --color-text-muted: #6B6158;
+    --color-border: rgba(139, 115, 85, 0.15);
+    --color-success: #6B8E4E;
+    --color-warning: #D4A574;
+    --color-error: #A85C4A;
+
+    /* Navbar */
+    --navbar-bg: rgba(250, 248, 245, 0.85);
+    --navbar-text: #4A403A;
+
+    /* Footer */
+    --footer-bg: #4A403A;
+    --footer-text: #FAF8F5;
+
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px rgba(44, 36, 24, 0.08), 0 4px 12px rgba(44, 36, 24, 0.04);
+    --shadow-elevated: 0 8px 24px rgba(44, 36, 24, 0.12), 0 2px 8px rgba(44, 36, 24, 0.06);
+    --shadow-strong: 0 16px 48px rgba(44, 36, 24, 0.18), 0 8px 16px rgba(44, 36, 24, 0.08);
+
+    /* Feature Card Gradient */
+    --gradient-card: linear-gradient(135deg, rgba(184, 149, 106, 0.05) 0%, rgba(74, 64, 58, 0.05) 100%);
+    --gradient-accent: linear-gradient(135deg, #B8956A 0%, #8B7355 100%);
+}
+
+/* ================================================================
+   THEME 2: OBSIDIAN NIGHT (深邃夜色)
+   高对比度的深色模式，赛博朋克风格
+   ================================================================ */
+[data-theme="obsidian-night"] {
+    /* Color Palette */
+    --color-primary: #E8E4E0;
+    --color-accent: #FF9F5F;
+    --color-bg-light: #0D0D0F;
+    --color-bg-card: #18181B;
+    --color-bg-secondary: #1E1E22;
+    --color-secondary: #A8A8A8;
+    --color-tertiary: #FF7A3D;
+    --color-text: #FAFAFA;
+    --color-text-muted: #9CA3AF;
+    --color-border: rgba(255, 159, 95, 0.15);
+    --color-success: #4ADE80;
+    --color-warning: #FBBF24;
+    --color-error: #F87171;
+
+    /* Navbar */
+    --navbar-bg: rgba(13, 13, 15, 0.9);
+    --navbar-text: #E8E4E0;
+
+    /* Footer */
+    --footer-bg: #18181B;
+    --footer-text: #FAFAFA;
+
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(255, 159, 95, 0.1);
+    --shadow-strong: 0 16px 48px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(255, 159, 95, 0.15);
+
+    /* Feature Card Gradient */
+    --gradient-card: linear-gradient(135deg, rgba(255, 159, 95, 0.08) 0%, rgba(255, 122, 61, 0.05) 100%);
+    --gradient-accent: linear-gradient(135deg, #FF9F5F 0%, #FF7A3D 100%);
+}
+
+/* ================================================================
+   THEME 3: JADE SERENITY (翡翠禅意)
+   东方美学，清新淡雅的翡翠绿调
+   ================================================================ */
+[data-theme="jade-serenity"] {
+    /* Color Palette */
+    --color-primary: #1C3D2E;
+    --color-accent: #4A9E7A;
+    --color-bg-light: #F7FAF8;
+    --color-bg-card: #FFFFFF;
+    --color-bg-secondary: #EDF5F0;
+    --color-secondary: #2D5F4A;
+    --color-tertiary: #6BB596;
+    --color-text: #1C3D2E;
+    --color-text-muted: #5E7A6B;
+    --color-border: rgba(74, 158, 122, 0.15);
+    --color-success: #4A9E7A;
+    --color-warning: #D4A574;
+    --color-error: #C85A54;
+
+    /* Navbar */
+    --navbar-bg: rgba(247, 250, 248, 0.9);
+    --navbar-text: #2D5F4A;
+
+    /* Footer */
+    --footer-bg: #1C3D2E;
+    --footer-text: #F7FAF8;
+
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px rgba(28, 61, 46, 0.08), 0 4px 12px rgba(28, 61, 46, 0.04);
+    --shadow-elevated: 0 8px 24px rgba(28, 61, 46, 0.12), 0 2px 8px rgba(28, 61, 46, 0.06);
+    --shadow-strong: 0 16px 48px rgba(28, 61, 46, 0.18), 0 8px 16px rgba(28, 61, 46, 0.08);
+
+    /* Feature Card Gradient */
+    --gradient-card: linear-gradient(135deg, rgba(74, 158, 122, 0.05) 0%, rgba(45, 95, 74, 0.05) 100%);
+    --gradient-accent: linear-gradient(135deg, #4A9E7A 0%, #2D5F4A 100%);
+}
+
+/* ================================================================
+   THEME 4: LAVENDER DUSK (薰衣草黄昏)
+   柔和浪漫的薰衣草紫调，温柔治愈
+   ================================================================ */
+[data-theme="lavender-dusk"] {
+    /* Color Palette */
+    --color-primary: #3D3455;
+    --color-accent: #9B8AC4;
+    --color-bg-light: #FAF9FC;
+    --color-bg-card: #FFFFFF;
+    --color-bg-secondary: #F5F3F9;
+    --color-secondary: #5D5278;
+    --color-tertiary: #B8A9D8;
+    --color-text: #3D3455;
+    --color-text-muted: #7A7091;
+    --color-border: rgba(155, 138, 196, 0.18);
+    --color-success: #7CB487;
+    --color-warning: #E0B88A;
+    --color-error: #C47B7B;
+
+    /* Navbar */
+    --navbar-bg: rgba(250, 249, 252, 0.9);
+    --navbar-text: #5D5278;
+
+    /* Footer */
+    --footer-bg: #3D3455;
+    --footer-text: #FAF9FC;
+
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px rgba(61, 52, 85, 0.08), 0 4px 12px rgba(61, 52, 85, 0.04);
+    --shadow-elevated: 0 8px 24px rgba(61, 52, 85, 0.12), 0 2px 8px rgba(156, 139, 196, 0.1);
+    --shadow-strong: 0 16px 48px rgba(61, 52, 85, 0.18), 0 8px 16px rgba(61, 52, 85, 0.08);
+
+    /* Feature Card Gradient */
+    --gradient-card: linear-gradient(135deg, rgba(155, 138, 196, 0.08) 0%, rgba(184, 169, 216, 0.05) 100%);
+    --gradient-accent: linear-gradient(135deg, #9B8AC4 0%, #B8A9D8 100%);
+}
+
+/* ================================================================
+   THEME 5: ARCTIC FROST (极地霜雪)
+   纯净极简的冷调设计，北欧风格
+   ================================================================ */
+[data-theme="arctic-frost"] {
+    /* Color Palette */
+    --color-primary: #1E2939;
+    --color-accent: #5A9BBF;
+    --color-bg-light: #F8FAFB;
+    --color-bg-card: #FFFFFF;
+    --color-bg-secondary: #EEF4F7;
+    --color-secondary: #3A5068;
+    --color-tertiary: #7BB4D4;
+    --color-text: #1E2939;
+    --color-text-muted: #5D6E7F;
+    --color-border: rgba(90, 155, 191, 0.12);
+    --color-success: #5AAF8C;
+    --color-warning: #D9A86C;
+    --color-error: #C86B6B;
+
+    /* Navbar */
+    --navbar-bg: rgba(248, 250, 251, 0.92);
+    --navbar-text: #3A5068;
+
+    /* Footer */
+    --footer-bg: #1E2939;
+    --footer-text: #F8FAFB;
+
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px rgba(30, 41, 57, 0.06), 0 4px 12px rgba(30, 41, 57, 0.03);
+    --shadow-elevated: 0 8px 24px rgba(30, 41, 57, 0.1), 0 2px 8px rgba(90, 155, 191, 0.08);
+    --shadow-strong: 0 16px 48px rgba(30, 41, 57, 0.15), 0 8px 16px rgba(30, 41, 57, 0.06);
+
+    /* Feature Card Gradient */
+    --gradient-card: linear-gradient(135deg, rgba(90, 155, 191, 0.05) 0%, rgba(123, 180, 212, 0.05) 100%);
+    --gradient-accent: linear-gradient(135deg, #5A9BBF 0%, #7BB4D4 100%);
+}
+
+/* ================================================================
+   THEME 6: TERRACOTTA SUNSET (陶土日落)
+   温暖大胆的陶土橘红色系
+   ================================================================ */
+[data-theme="terracotta-sunset"] {
+    /* Color Palette */
+    --color-primary: #3D2E28;
+    --color-accent: #C87D5A;
+    --color-bg-light: #FDF9F6;
+    --color-bg-card: #FFFFFF;
+    --color-bg-secondary: #F8F2ED;
+    --color-secondary: #6B4F43;
+    --color-tertiary: #E09B74;
+    --color-text: #3D2E28;
+    --color-text-muted: #7D695D;
+    --color-border: rgba(200, 125, 90, 0.15);
+    --color-success: #7AA67A;
+    --color-warning: #E0B88A;
+    --color-error: #C85A5A;
+
+    /* Navbar */
+    --navbar-bg: rgba(253, 249, 246, 0.9);
+    --navbar-text: #6B4F43;
+
+    /* Footer */
+    --footer-bg: #3D2E28;
+    --footer-text: #FDF9F6;
+
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px rgba(61, 46, 40, 0.08), 0 4px 12px rgba(61, 46, 40, 0.04);
+    --shadow-elevated: 0 8px 24px rgba(61, 46, 40, 0.12), 0 2px 8px rgba(200, 125, 90, 0.08);
+    --shadow-strong: 0 16px 48px rgba(61, 46, 40, 0.18), 0 8px 16px rgba(61, 46, 40, 0.08);
+
+    /* Feature Card Gradient */
+    --gradient-card: linear-gradient(135deg, rgba(200, 125, 90, 0.08) 0%, rgba(224, 155, 116, 0.05) 100%);
+    --gradient-accent: linear-gradient(135deg, #C87D5A 0%, #E09B74 100%);
+}
+
+/* ================================================================
+   THEME 7: INK WASH (水墨丹青)
+   高雅的黑白灰调，点缀印章红，极简东方美学
+   ================================================================ */
+[data-theme="ink-wash"] {
+    --color-primary: #1A1A1A;
+    --color-accent: #A63434;
+    /* Seal Red */
+    --color-bg-light: #F0F2F5;
+    /* Rice Paper Whiteish */
+    --color-bg-card: #FFFFFF;
+    --color-bg-secondary: #E3E5E8;
+    --color-secondary: #454545;
+    --color-tertiary: #8C8C8C;
+    --color-text: #1A1A1A;
+    --color-text-muted: #666666;
+    --color-border: rgba(26, 26, 26, 0.08);
+    --color-success: #2B8A3E;
+    --color-warning: #F08C00;
+    --color-error: #C92A2A;
+
+    --navbar-bg: rgba(240, 242, 245, 0.9);
+    --navbar-text: #1A1A1A;
+
+    --footer-bg: #1A1A1A;
+    --footer-text: #F0F2F5;
+
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.18);
+
+    --gradient-card: linear-gradient(135deg, rgba(26, 26, 26, 0.03) 0%, rgba(26, 26, 26, 0) 100%);
+    --gradient-accent: linear-gradient(135deg, #A63434 0%, #802020 100%);
+}
+
+/* ================================================================
+   THEME 8: INDUSTRIAL RUST (工业锈迹)
+   硬朗的深灰与锈色，粗犷实用主义
+   ================================================================ */
+[data-theme="industrial-rust"] {
+    --color-primary: #FAFAFA;
+    /* Changed from dark to light for text visibility */
+    --color-accent: #FF5722;
+    /* Rust Orange */
+    --color-bg-light: #1A1A1A;
+    /* Darker background */
+    --color-bg-card: #2A2A2A;
+    --color-bg-secondary: #3A3A3A;
+    --color-secondary: #BDBDBD;
+    /* Lighter secondary text */
+    --color-tertiary: #FF7043;
+    /* Lighter rust */
+    --color-text: #FAFAFA;
+    /* Pure white text */
+    --color-text-muted: #B0B0B0;
+    /* Lighter muted text */
+    --color-border: rgba(255, 87, 34, 0.25);
+    --color-success: #66BB6A;
+    --color-warning: #FFCA28;
+    --color-error: #EF5350;
+
+    --navbar-bg: rgba(26, 26, 26, 0.95);
+    --navbar-text: #FAFAFA;
+    /* White navbar text */
+
+    --footer-bg: #121212;
+    --footer-text: #E0E0E0;
+
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 87, 34, 0.1);
+    --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.7);
+
+    --gradient-card: linear-gradient(135deg, rgba(255, 87, 34, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    --gradient-accent: linear-gradient(135deg, #FF5722 0%, #D84315 100%);
+}
+
+/* ================================================================
+   THEME 9: SAKURA BREEZE (樱花微风)
+   优雅的淡粉与暖灰，日式赏樱氛围
+   ================================================================ */
+[data-theme="sakura-breeze"] {
+    --color-primary: #543A3A;
+    --color-accent: #D48995;
+    /* Dusty Pink */
+    --color-bg-light: #FFF0F2;
+    --color-bg-card: #FFFFFF;
+    --color-bg-secondary: #FFE5E9;
+    --color-secondary: #8D6E63;
+    --color-tertiary: #E0B2BC;
+    --color-text: #4E342E;
+    --color-text-muted: #8D6E63;
+    --color-border: rgba(212, 137, 149, 0.2);
+    --color-success: #81C784;
+    --color-warning: #FFD54F;
+    --color-error: #E57373;
+
+    --navbar-bg: rgba(255, 240, 242, 0.9);
+    --navbar-text: #543A3A;
+
+    --footer-bg: #543A3A;
+    --footer-text: #FFF0F2;
+
+    --shadow-subtle: 0 2px 5px rgba(212, 137, 149, 0.15);
+    --shadow-elevated: 0 5px 15px rgba(212, 137, 149, 0.2);
+    --shadow-strong: 0 15px 35px rgba(212, 137, 149, 0.25);
+
+    --gradient-card: linear-gradient(135deg, rgba(212, 137, 149, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+    --gradient-accent: linear-gradient(135deg, #D48995 0%, #E0B2BC 100%);
+}
+
+/* ================================================================
+   THEME 10: DEEP OCEAN (深海潜游)
+   静谧的深蓝与生物荧光，探索未知
+   ================================================================ */
+[data-theme="deep-ocean"] {
+    --color-primary: #E0F7FA;
+    --color-accent: #26C6DA;
+    /* Cyan */
+    --color-bg-light: #001220;
+    /* Dark Abyss */
+    --color-bg-card: #00264D;
+    --color-bg-secondary: #003366;
+    --color-secondary: #80DEEA;
+    --color-tertiary: #00ACC1;
+    --color-text: #E0F7FA;
+    --color-text-muted: #81D4FA;
+    --color-border: rgba(38, 198, 218, 0.2);
+    --color-success: #00E676;
+    --color-warning: #FFEA00;
+    --color-error: #FF1744;
+
+    --navbar-bg: rgba(0, 18, 32, 0.9);
+    --navbar-text: #E0F7FA;
+
+    --footer-bg: #000A12;
+    --footer-text: #81D4FA;
+
+    --shadow-subtle: 0 2px 5px rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 5px 15px rgba(0, 0, 0, 0.6);
+    --shadow-strong: 0 15px 35px rgba(0, 0, 0, 0.7);
+
+    --gradient-card: linear-gradient(135deg, rgba(38, 198, 218, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+    --gradient-accent: linear-gradient(135deg, #26C6DA 0%, #00ACC1 100%);
+}
+
+/* ================================================================
+   THEME 11: CLASSIC MANUSCRIPT (古籍羊皮)
+   致敬经典，泛黄的纸张与墨迹
+   ================================================================ */
+[data-theme="classic-manuscript"] {
+    --color-primary: #3E2723;
+    --color-accent: #C5A059;
+    /* Antique Gold */
+    --color-bg-light: #F4EBD9;
+    /* Parchment */
+    --color-bg-card: #FDFBF7;
+    --color-bg-secondary: #E8DCC5;
+    --color-secondary: #5D4037;
+    --color-tertiary: #8D6E63;
+    --color-text: #3E2723;
+    --color-text-muted: #6D4C41;
+    --color-border: rgba(62, 39, 35, 0.12);
+    --color-success: #558B2F;
+    --color-warning: #F9A825;
+    --color-error: #BF360C;
+
+    --navbar-bg: rgba(244, 235, 217, 0.9);
+    --navbar-text: #3E2723;
+
+    --footer-bg: #3E2723;
+    --footer-text: #F4EBD9;
+
+    --shadow-subtle: 0 1px 2px rgba(62, 39, 35, 0.1);
+    --shadow-elevated: 0 4px 8px rgba(62, 39, 35, 0.12);
+    --shadow-strong: 0 12px 24px rgba(62, 39, 35, 0.15);
+
+    --gradient-card: linear-gradient(135deg, rgba(197, 160, 89, 0.08) 0%, rgba(62, 39, 35, 0.03) 100%);
+    --gradient-accent: linear-gradient(135deg, #C5A059 0%, #8D6E63 100%);
+}
+
+/* ================================================================
+   THEME 12: MIDNIGHT FOREST (深夜森林)
+   深邃的暗绿色调，神秘的自然氛围
+   ================================================================ */
+[data-theme="midnight-forest"] {
+    --color-primary: #E8F5E9;
+    --color-accent: #4CAF50;
+    /* Forest Green */
+    --color-bg-light: #0A1F0A;
+    --color-bg-card: #142814;
+    --color-bg-secondary: #1E3A1E;
+    --color-secondary: #A5D6A7;
+    --color-tertiary: #81C784;
+    --color-text: #E8F5E9;
+    --color-text-muted: #A5D6A7;
+    --color-border: rgba(76, 175, 80, 0.2);
+    --color-success: #66BB6A;
+    --color-warning: #FFD54F;
+    --color-error: #EF5350;
+
+    --navbar-bg: rgba(10, 31, 10, 0.95);
+    --navbar-text: #E8F5E9;
+
+    --footer-bg: #061206;
+    --footer-text: #A5D6A7;
+
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 15px rgba(76, 175, 80, 0.1);
+    --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.7);
+
+    --gradient-card: linear-gradient(135deg, rgba(76, 175, 80, 0.08) 0%, rgba(0, 0, 0, 0.1) 100%);
+    --gradient-accent: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+}
+
+/* ================================================================
+   THEME 13: NOIR CINEMA (黑白电影)
+   经典黑白电影风格，高对比度戏剧感
+   ================================================================ */
+[data-theme="noir-cinema"] {
+    --color-primary: #FFFFFF;
+    --color-accent: #B0B0B0;
+    /* Silver */
+    --color-bg-light: #000000;
+    --color-bg-card: #1A1A1A;
+    --color-bg-secondary: #2A2A2A;
+    --color-secondary: #E0E0E0;
+    --color-tertiary: #808080;
+    --color-text: #FFFFFF;
+    --color-text-muted: #A0A0A0;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-success: #FFFFFF;
+    --color-warning: #C0C0C0;
+    --color-error: #FF6B6B;
+
+    --navbar-bg: rgba(0, 0, 0, 0.95);
+    --navbar-text: #FFFFFF;
+
+    --footer-bg: #000000;
+    --footer-text: #808080;
+
+    --shadow-subtle: 0 1px 3px rgba(255, 255, 255, 0.05);
+    --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.8);
+    --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.9);
+
+    --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.2) 100%);
+    --gradient-accent: linear-gradient(135deg, #E0E0E0 0%, #808080 100%);
+}
+
+/* ================================================================
+   THEME 14: VOLCANIC EMBER (火山余烬)
+   炙热的火山主题，深黑与熔岩红
+   ================================================================ */
+[data-theme="volcanic-ember"] {
+    --color-primary: #FFEBEE;
+    --color-accent: #FF4444;
+    /* Lava Red */
+    --color-bg-light: #1A0A0A;
+    --color-bg-card: #2A1414;
+    --color-bg-secondary: #3A1E1E;
+    --color-secondary: #FFCDD2;
+    --color-tertiary: #FF7043;
+    --color-text: #FFEBEE;
+    --color-text-muted: #EF9A9A;
+    --color-border: rgba(255, 68, 68, 0.25);
+    --color-success: #66BB6A;
+    --color-warning: #FFB74D;
+    --color-error: #FF1744;
+
+    --navbar-bg: rgba(26, 10, 10, 0.95);
+    --navbar-text: #FFEBEE;
+
+    --footer-bg: #0D0505;
+    --footer-text: #EF9A9A;
+
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 68, 68, 0.15);
+    --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.7);
+
+    --gradient-card: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+    --gradient-accent: linear-gradient(135deg, #FF4444 0%, #D32F2F 100%);
+}
+
+/* ================================================================
+   THEME 15: COSMIC VOID (宇宙虚空)
+   浩瀚的宇宙主题，深紫与星云粉
+   ================================================================ */
+[data-theme="cosmic-void"] {
+    --color-primary: #F3E5F5;
+    --color-accent: #CE93D8;
+    /* Nebula Pink */
+    --color-bg-light: #0D0A14;
+    --color-bg-card: #1A1424;
+    --color-bg-secondary: #261E34;
+    --color-secondary: #E1BEE7;
+    --color-tertiary: #BA68C8;
+    --color-text: #F3E5F5;
+    --color-text-muted: #CE93D8;
+    --color-border: rgba(206, 147, 216, 0.2);
+    --color-success: #81C784;
+    --color-warning: #FFD54F;
+    --color-error: #FF7043;
+
+    --navbar-bg: rgba(13, 10, 20, 0.95);
+    --navbar-text: #F3E5F5;
+
+    --footer-bg: #06040A;
+    --footer-text: #CE93D8;
+
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 20px rgba(206, 147, 216, 0.1);
+    --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.7);
+
+    --gradient-card: linear-gradient(135deg, rgba(206, 147, 216, 0.08) 0%, rgba(0, 0, 0, 0.15) 100%);
+    --gradient-accent: linear-gradient(135deg, #CE93D8 0%, #9C27B0 100%);
+}
+
+/* ================================================================
+   THEME 16: CARBON FIBER (碳纤质感)
+   科技感的碳纤维主题，银色金属质感
+   ================================================================ */
+[data-theme="carbon-fiber"] {
+    --color-primary: #ECEFF1;
+    --color-accent: #78909C;
+    /* Steel Blue */
+    --color-bg-light: #121212;
+    --color-bg-card: #1E1E1E;
+    --color-bg-secondary: #2D2D2D;
+    --color-secondary: #B0BEC5;
+    --color-tertiary: #546E7A;
+    --color-text: #ECEFF1;
+    --color-text-muted: #90A4AE;
+    --color-border: rgba(120, 144, 156, 0.2);
+    --color-success: #4DB6AC;
+    --color-warning: #FFB74D;
+    --color-error: #EF5350;
+
+    --navbar-bg: rgba(18, 18, 18, 0.95);
+    --navbar-text: #ECEFF1;
+
+    --footer-bg: #0A0A0A;
+    --footer-text: #90A4AE;
+
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 15px rgba(120, 144, 156, 0.1);
+    --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.7);
+
+    --gradient-card: linear-gradient(135deg, rgba(120, 144, 156, 0.05) 0%, rgba(0, 0, 0, 0.1) 100%);
+    --gradient-accent: linear-gradient(135deg, #78909C 0%, #455A64 100%);
+}
+
+/* ================================================================
+   THEME SWITCHER STYLES
+   ================================================================ */
+.theme-switcher {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 9998;
+    font-family: var(--font-sans);
+}
+
+.theme-toggle-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-accent);
+    color: white;
+    cursor: pointer;
+    box-shadow: var(--shadow-elevated);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: var(--shadow-strong);
+}
+
+.theme-toggle-btn:hover::before {
+    opacity: 1;
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.4s ease;
+}
+
+.theme-toggle-btn:hover svg {
+    transform: rotate(20deg);
+}
+
+/* Theme Panel */
+.theme-panel {
+    position: absolute;
+    bottom: 65px;
+    left: 0;
+    width: 280px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: var(--shadow-strong);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: bottom left;
+}
+
+.theme-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.theme-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.theme-panel-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.theme-panel-close {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: var(--color-bg-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    transition: all 0.2s ease;
+}
+
+.theme-panel-close:hover {
+    background: var(--color-accent);
+    color: white;
+}
+
+.theme-panel-close svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Theme Grid */
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.theme-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 8px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: var(--color-bg-secondary);
+}
+
+.theme-option:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+.theme-option.active {
+    border-color: var(--color-accent);
+    background: rgba(var(--color-accent-rgb, 184, 149, 106), 0.1);
+}
+
+.theme-option.active::after {
+    content: '✓';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.theme-option {
+    position: relative;
+}
+
+/* Theme Preview Swatch */
+.theme-swatch {
+    width: 48px;
+    height: 32px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.theme-swatch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+}
+
+.theme-swatch::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+}
+
+/* Warm Earth Swatch */
+.theme-option[data-theme="warm-earth"] .theme-swatch {
+    background: #FAF8F5;
+}
+
+.theme-option[data-theme="warm-earth"] .theme-swatch::before {
+    background: #B8956A;
+}
+
+.theme-option[data-theme="warm-earth"] .theme-swatch::after {
+    background: #4A403A;
+}
+
+/* Obsidian Night Swatch */
+.theme-option[data-theme="obsidian-night"] .theme-swatch {
+    background: #0D0D0F;
+}
+
+.theme-option[data-theme="obsidian-night"] .theme-swatch::before {
+    background: #FF9F5F;
+}
+
+.theme-option[data-theme="obsidian-night"] .theme-swatch::after {
+    background: #18181B;
+}
+
+/* Jade Serenity Swatch */
+.theme-option[data-theme="jade-serenity"] .theme-swatch {
+    background: #F7FAF8;
+}
+
+.theme-option[data-theme="jade-serenity"] .theme-swatch::before {
+    background: #4A9E7A;
+}
+
+.theme-option[data-theme="jade-serenity"] .theme-swatch::after {
+    background: #1C3D2E;
+}
+
+/* Lavender Dusk Swatch */
+.theme-option[data-theme="lavender-dusk"] .theme-swatch {
+    background: #FAF9FC;
+}
+
+.theme-option[data-theme="lavender-dusk"] .theme-swatch::before {
+    background: #9B8AC4;
+}
+
+.theme-option[data-theme="lavender-dusk"] .theme-swatch::after {
+    background: #3D3455;
+}
+
+/* Arctic Frost Swatch */
+.theme-option[data-theme="arctic-frost"] .theme-swatch {
+    background: #F8FAFB;
+}
+
+.theme-option[data-theme="arctic-frost"] .theme-swatch::before {
+    background: #5A9BBF;
+}
+
+.theme-option[data-theme="arctic-frost"] .theme-swatch::after {
+    background: #1E2939;
+}
+
+/* Terracotta Sunset Swatch */
+.theme-option[data-theme="terracotta-sunset"] .theme-swatch {
+    background: #FDF9F6;
+}
+
+.theme-option[data-theme="terracotta-sunset"] .theme-swatch::before {
+    background: #C87D5A;
+}
+
+.theme-option[data-theme="terracotta-sunset"] .theme-swatch::after {
+    background: #3D2E28;
+}
+
+/* Midnight Forest Swatch */
+.theme-option[data-theme="midnight-forest"] .theme-swatch {
+    background: #0A1F0A;
+}
+
+.theme-option[data-theme="midnight-forest"] .theme-swatch::before {
+    background: #4CAF50;
+}
+
+.theme-option[data-theme="midnight-forest"] .theme-swatch::after {
+    background: #142814;
+}
+
+/* Noir Cinema Swatch */
+.theme-option[data-theme="noir-cinema"] .theme-swatch {
+    background: #000000;
+}
+
+.theme-option[data-theme="noir-cinema"] .theme-swatch::before {
+    background: #B0B0B0;
+}
+
+.theme-option[data-theme="noir-cinema"] .theme-swatch::after {
+    background: #1A1A1A;
+}
+
+/* Volcanic Ember Swatch */
+.theme-option[data-theme="volcanic-ember"] .theme-swatch {
+    background: #1A0A0A;
+}
+
+.theme-option[data-theme="volcanic-ember"] .theme-swatch::before {
+    background: #FF4444;
+}
+
+.theme-option[data-theme="volcanic-ember"] .theme-swatch::after {
+    background: #2A1414;
+}
+
+/* Cosmic Void Swatch */
+.theme-option[data-theme="cosmic-void"] .theme-swatch {
+    background: #0D0A14;
+}
+
+.theme-option[data-theme="cosmic-void"] .theme-swatch::before {
+    background: #CE93D8;
+}
+
+.theme-option[data-theme="cosmic-void"] .theme-swatch::after {
+    background: #1A1424;
+}
+
+/* Carbon Fiber Swatch */
+.theme-option[data-theme="carbon-fiber"] .theme-swatch {
+    background: #121212;
+}
+
+.theme-option[data-theme="carbon-fiber"] .theme-swatch::before {
+    background: #78909C;
+}
+
+.theme-option[data-theme="carbon-fiber"] .theme-swatch::after {
+    background: #1E1E1E;
+}
+
+.theme-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* ================================================================
+   THEME-AWARE COMPONENT OVERRIDES
+   ================================================================ */
+
+/* Navbar Override */
+body .navbar {
+    background: var(--navbar-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+}
+
+body .navbar-logo,
+body .navbar-logo-text {
+    color: var(--navbar-text);
+}
+
+body .nav-link {
+    color: var(--navbar-text);
+}
+
+body .nav-link:hover,
+body .nav-link.active {
+    color: var(--color-accent);
+}
+
+/* Footer Override */
+body .footer {
+    background: var(--footer-bg) !important;
+}
+
+body .footer p,
+body .footer-container p {
+    color: var(--footer-text) !important;
+}
+
+/* Card Override */
+body .bento-card {
+    background: var(--color-bg-card);
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-subtle);
+}
+
+body .bento-card:hover {
+    box-shadow: var(--shadow-elevated);
+}
+
+body .bento-card::before {
+    background: var(--gradient-accent);
+}
+
+/* Text Override */
+body,
+body .hero-description,
+body .feature-description {
+    color: var(--color-text);
+}
+
+body .text-muted,
+body .stats-label {
+    color: var(--color-text-muted);
+}
+
+body .text-accent,
+body .hero-tag,
+body .navbar-logo-subtitle,
+body .stats-value,
+body .feature-tag {
+    color: var(--color-accent);
+}
+
+body .hero-title {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Button Override */
+body .btn-primary {
+    background: var(--color-primary);
+}
+
+body .btn-primary:hover {
+    background: var(--color-secondary);
+}
+
+body .btn-outline {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+body .btn-outline:hover {
+    background: var(--color-primary);
+    color: var(--color-bg-card);
+}
+
+body .btn-accent {
+    background: var(--color-accent);
+}
+
+body .btn-accent:hover {
+    background: var(--color-tertiary);
+}
+
+/* Background Override */
+body {
+    background-color: var(--color-bg-light);
+}
+
+/* Accent elements */
+body .nav-link::after,
+body .divider-zen {
+    background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%);
+}
+
+/* ================================================================
+   DARK THEME BUTTON OVERRIDES
+   Ensure buttons remain readable in dark themes
+   ================================================================ */
+
+/* Dark themes: Primary button uses accent color for standout effect */
+html[data-theme="obsidian-night"] .btn-primary,
+html[data-theme="industrial-rust"] .btn-primary,
+html[data-theme="deep-ocean"] .btn-primary,
+html[data-theme="midnight-forest"] .btn-primary,
+html[data-theme="noir-cinema"] .btn-primary,
+html[data-theme="volcanic-ember"] .btn-primary,
+html[data-theme="cosmic-void"] .btn-primary,
+html[data-theme="carbon-fiber"] .btn-primary {
+    background: var(--color-accent) !important;
+    color: #FFFFFF !important;
+    border: 1px solid var(--color-accent);
+    box-shadow: 0 0 15px rgba(var(--color-accent), 0.3);
+}
+
+html[data-theme="obsidian-night"] .btn-primary:hover,
+html[data-theme="industrial-rust"] .btn-primary:hover,
+html[data-theme="deep-ocean"] .btn-primary:hover,
+html[data-theme="midnight-forest"] .btn-primary:hover,
+html[data-theme="noir-cinema"] .btn-primary:hover,
+html[data-theme="volcanic-ember"] .btn-primary:hover,
+html[data-theme="cosmic-void"] .btn-primary:hover,
+html[data-theme="carbon-fiber"] .btn-primary:hover {
+    background: var(--color-tertiary) !important;
+    color: #FFFFFF !important;
+    border-color: var(--color-tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark themes: Outline button adjustments */
+html[data-theme="obsidian-night"] .btn-outline,
+html[data-theme="industrial-rust"] .btn-outline,
+html[data-theme="deep-ocean"] .btn-outline,
+html[data-theme="midnight-forest"] .btn-outline,
+html[data-theme="noir-cinema"] .btn-outline,
+html[data-theme="volcanic-ember"] .btn-outline,
+html[data-theme="cosmic-void"] .btn-outline,
+html[data-theme="carbon-fiber"] .btn-outline {
+    color: var(--color-text) !important;
+    border-color: var(--color-border) !important;
+    background: transparent !important;
+}
+
+html[data-theme="obsidian-night"] .btn-outline:hover,
+html[data-theme="industrial-rust"] .btn-outline:hover,
+html[data-theme="deep-ocean"] .btn-outline:hover,
+html[data-theme="midnight-forest"] .btn-outline:hover,
+html[data-theme="noir-cinema"] .btn-outline:hover,
+html[data-theme="volcanic-ember"] .btn-outline:hover,
+html[data-theme="cosmic-void"] .btn-outline:hover,
+html[data-theme="carbon-fiber"] .btn-outline:hover {
+    background: var(--color-accent) !important;
+    color: #FFFFFF !important;
+    border-color: var(--color-accent) !important;
+}
+
+/* ================================================================
+   DARK THEME LOGO ADAPTATIONS
+   Make logo visible on dark backgrounds
+   ================================================================ */
+
+/* Universal dark theme logo inversion */
+html[data-theme="obsidian-night"] .navbar-logo>img,
+html[data-theme="industrial-rust"] .navbar-logo>img,
+html[data-theme="deep-ocean"] .navbar-logo>img,
+html[data-theme="midnight-forest"] .navbar-logo>img,
+html[data-theme="noir-cinema"] .navbar-logo>img,
+html[data-theme="volcanic-ember"] .navbar-logo>img,
+html[data-theme="cosmic-void"] .navbar-logo>img,
+html[data-theme="carbon-fiber"] .navbar-logo>img,
+[data-theme="obsidian-night"] img[alt="合肥工业大学"],
+[data-theme="industrial-rust"] img[alt="合肥工业大学"],
+[data-theme="deep-ocean"] img[alt="合肥工业大学"],
+[data-theme="midnight-forest"] img[alt="合肥工业大学"],
+[data-theme="noir-cinema"] img[alt="合肥工业大学"],
+[data-theme="volcanic-ember"] img[alt="合肥工业大学"],
+[data-theme="cosmic-void"] img[alt="合肥工业大学"],
+[data-theme="carbon-fiber"] img[alt="合肥工业大学"] {
+    filter: brightness(0) invert(1) !important;
+    -webkit-filter: brightness(0) invert(1) !important;
+}
+
+/* Mobile Menu Override */
+@media (max-width: 768px) {
+    body .navbar-nav {
+        background: var(--navbar-bg);
+    }
+
+    .theme-switcher {
+        bottom: 70px;
+        /* Raised to avoid browser UI */
+        left: 16px;
+    }
+
+    .theme-toggle-btn {
+        width: 46px;
+        height: 46px;
+    }
+
+    .theme-panel {
+        width: 260px;
+        left: 0;
+    }
+}
+
+/* ================================================================
+   THEME TRANSITION
+   Smooth transition when switching themes
+   ================================================================ */
+body,
+body *,
+body *::before,
+body *::after {
+    transition: background-color 0.4s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Exceptions - no transition for these */
+body .btn,
+body .nav-link::after,
+body .bento-card::before,
+body .theme-toggle-btn,
+body .theme-option {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ink Wash Swatch */
+.theme-option[data-theme="ink-wash"] .theme-swatch {
+    background: #F0F2F5;
+}
+
+.theme-option[data-theme="ink-wash"] .theme-swatch::before {
+    background: #A63434;
+}
+
+.theme-option[data-theme="ink-wash"] .theme-swatch::after {
+    background: #1A1A1A;
+}
+
+/* Industrial Rust Swatch */
+.theme-option[data-theme="industrial-rust"] .theme-swatch {
+    background: #212121;
+}
+
+.theme-option[data-theme="industrial-rust"] .theme-swatch::before {
+    background: #FF5722;
+}
+
+.theme-option[data-theme="industrial-rust"] .theme-swatch::after {
+    background: #2B2B2B;
+}
+
+/* Sakura Breeze Swatch */
+.theme-option[data-theme="sakura-breeze"] .theme-swatch {
+    background: #FFF0F2;
+}
+
+.theme-option[data-theme="sakura-breeze"] .theme-swatch::before {
+    background: #D48995;
+}
+
+.theme-option[data-theme="sakura-breeze"] .theme-swatch::after {
+    background: #543A3A;
+}
+
+/* Deep Ocean Swatch */
+.theme-option[data-theme="deep-ocean"] .theme-swatch {
+    background: #001220;
+}
+
+.theme-option[data-theme="deep-ocean"] .theme-swatch::before {
+    background: #26C6DA;
+}
+
+.theme-option[data-theme="deep-ocean"] .theme-swatch::after {
+    background: #00264D;
+}
+
+/* Classic Manuscript Swatch */
+.theme-option[data-theme="classic-manuscript"] .theme-swatch {
+    background: #F4EBD9;
+}
+
+.theme-option[data-theme="classic-manuscript"] .theme-swatch::before {
+    background: #C5A059;
+}
+
+.theme-option[data-theme="classic-manuscript"] .theme-swatch::after {
+    background: #3E2723;
+}

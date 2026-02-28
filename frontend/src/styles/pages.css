@@ -1,0 +1,762 @@
+/* ============================================
+   TeaVision V12 | 页面专属样式
+   各页面的布局和组件样式
+   ============================================ */
+
+/* ==================== 首页 Hero 区 ==================== */
+
+.tv-hero {
+    text-align: center;
+    padding: var(--space-3xl) 0;
+    margin-bottom: var(--space-2xl);
+}
+
+.tv-hero__title {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--color-primary);
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+}
+
+.tv-hero__title-accent {
+    color: var(--color-accent);
+    font-style: italic;
+    font-family: var(--font-serif);
+}
+
+.tv-hero__desc {
+    font-size: 1.15rem;
+    color: var(--color-text-light);
+    max-width: 640px;
+    margin: 0 auto var(--space-xl);
+    line-height: 1.7;
+}
+
+.tv-hero__badges {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.tv-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+}
+
+/* ==================== 首页功能导航卡片 ==================== */
+
+.tv-feature-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.tv-feature-card__icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: var(--space-md);
+    color: var(--color-accent);
+}
+
+.tv-feature-card__arrow {
+    position: absolute;
+    top: var(--space-xl);
+    right: var(--space-xl);
+    width: 20px;
+    height: 20px;
+    color: var(--color-text-light);
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: all 0.3s var(--ease-out);
+}
+
+.tv-feature-card:hover .tv-feature-card__arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+
+/* ==================== 检测页 ==================== */
+
+.tv-detect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+.tv-detect-params {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.tv-param-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tv-param-row label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.tv-param-row .tv-param-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.tv-result-image {
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+}
+
+.tv-detection-list {
+    margin-top: var(--space-lg);
+}
+
+.tv-detection-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    background: rgba(0, 0, 0, 0.02);
+    margin-bottom: var(--space-xs);
+    font-size: 0.85rem;
+}
+
+.tv-detection-item__name {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.tv-detection-item__conf {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--color-accent);
+}
+
+
+/* ==================== 训练结果页 ==================== */
+
+.tv-chart-container {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.tv-chart-container canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+/* 训练可视化图片网格 */
+.tv-training-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+.tv-training-gallery__item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: box-shadow 0.3s var(--ease-out), transform 0.2s var(--ease-out);
+}
+
+.tv-training-gallery__item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* results.png 是宽幅图，横跨两列 */
+.tv-training-gallery__item--wide {
+    grid-column: span 2;
+}
+
+.tv-training-gallery__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+}
+
+.tv-training-gallery__img:hover {
+    opacity: 0.92;
+}
+
+.tv-training-gallery__caption {
+    padding: 10px var(--space-md);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: center;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+}
+
+/* 全屏图片浮层 */
+.tv-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    animation: fadeIn 0.2s var(--ease-out);
+}
+
+.tv-lightbox img {
+    max-width: 95vw;
+    max-height: 92vh;
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ==================== 模型对比页 ==================== */
+
+.tv-comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    font-size: 0.85rem;
+}
+
+.tv-comparison-table th {
+    background: rgba(0, 0, 0, 0.03);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tv-comparison-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+.tv-comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.tv-comparison-table tr:hover td {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+/* 新版模型对比布局 */
+.tv-comparison-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-xl);
+    min-height: 600px;
+}
+
+.tv-comparison-sidebar {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    max-height: calc(100vh - 120px);
+    position: sticky;
+    top: 90px;
+}
+
+.tv-comparison-sidebar__header {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+}
+
+.tv-comparison-sidebar__clear {
+    background: none;
+    border: none;
+    color: var(--color-text-light);
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.tv-comparison-sidebar__clear:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--color-primary);
+}
+
+.tv-comparison-sidebar__list {
+    list-style: none;
+    padding: var(--space-xs);
+    margin: 0;
+    overflow-y: auto;
+}
+
+.tv-comparison-run {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 2px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+.tv-comparison-run:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.tv-comparison-run.selected {
+    background: rgba(184, 149, 106, 0.1);
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.tv-comparison-run__checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: var(--color-surface);
+}
+
+.tv-comparison-run.selected .tv-comparison-run__checkbox {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.tv-comparison-run__checkbox svg {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s;
+}
+
+.tv-comparison-run.selected .tv-comparison-run__checkbox svg {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.tv-comparison-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background: var(--color-surface);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    padding: var(--space-2xl);
+}
+
+@media (max-width: 900px) {
+    .tv-comparison-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .tv-comparison-sidebar {
+        position: static;
+        max-height: 300px;
+    }
+}
+
+/* 快捷预设按钮 */
+.tv-comparison-presets {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tv-comparison-presets__title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+}
+
+.tv-comparison-presets__group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.tv-comparison-presets__group:last-child {
+    margin-bottom: 0;
+}
+
+.tv-preset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-light);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-in-out);
+    white-space: nowrap;
+    font-family: var(--font-sans);
+}
+
+.tv-preset-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: rgba(184, 149, 106, 0.06);
+}
+
+.tv-preset-btn:active {
+    transform: scale(0.96);
+}
+
+.tv-preset-btn--scale {
+    border-color: rgba(45, 64, 51, 0.25);
+    color: #2D4033;
+}
+
+.tv-preset-btn--scale:hover {
+    border-color: #2D4033;
+    background: rgba(45, 64, 51, 0.06);
+    color: #2D4033;
+}
+
+.tv-preset-btn--scheme {
+    border-color: rgba(184, 149, 106, 0.35);
+    color: #8B7355;
+}
+
+.tv-preset-btn--scheme:hover {
+    border-color: var(--color-accent);
+    background: rgba(184, 149, 106, 0.08);
+    color: var(--color-accent);
+}
+
+
+/* ==================== 知识库页 (新版) ==================== */
+
+.tv-knowledge-controls {
+    margin-bottom: var(--space-xl);
+}
+
+.tv-search-wrapper {
+    position: relative;
+    max-width: 400px;
+    margin-bottom: var(--space-md);
+}
+
+.tv-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--color-text-light);
+}
+
+.tv-search-input {
+    padding-left: 40px;
+    width: 100%;
+}
+
+.tv-category-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.tv-category-tabs::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.tv-tea-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+
+.tv-tea-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all 0.3s var(--ease-out);
+    display: flex;
+    flex-direction: column;
+}
+
+.tv-tea-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent);
+}
+
+.tv-tea-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 60%;
+    /* Aspect ratio 5:3 */
+    background: var(--color-bg-secondary);
+    overflow: hidden;
+}
+
+.tv-tea-card__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--ease-out);
+}
+
+.tv-tea-card:hover .tv-tea-card__img {
+    transform: scale(1.05);
+}
+
+.tv-tea-card__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--color-text-light);
+}
+
+.tv-tea-card__content {
+    padding: var(--space-md);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tv-tea-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-xs);
+}
+
+.tv-tea-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+    font-family: var(--font-serif);
+}
+
+.tv-tea-card__subtitle {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.tv-tea-card__desc {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-md);
+    line-height: 1.5;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tv-tea-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tv-tag {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(184, 149, 106, 0.1);
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.tv-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--space-3xl);
+    color: var(--color-text-light);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-border);
+}
+
+/* 移动端优化 */
+@media (max-width: 600px) {
+    .tv-tea-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .tv-tea-card__image-wrapper {
+        padding-top: 50%;
+        /* Taller image on mobile */
+    }
+}
+
+/* ==================== 统计页 ==================== */
+
+.tv-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+}
+
+
+/* ==================== 数据增强页 ==================== */
+
+.tv-augment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-md);
+}
+
+.tv-augment-card {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+
+.tv-augment-card__img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.tv-augment-card__label {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-surface);
+}
+
+
+/* ==================== 响应式适配 ==================== */
+
+@media (max-width: 768px) {
+    .tv-hero__title {
+        font-size: 1.8rem;
+    }
+
+    .tv-hero__desc {
+        font-size: 0.95rem;
+    }
+
+    .tv-detect-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tv-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tv-knowledge-card {
+        flex-direction: column;
+    }
+
+    .tv-knowledge-card__img {
+        width: 100%;
+        height: 180px;
+    }
+
+    /* 模型对比表格移动端卡片化 */
+    .tv-comparison-table,
+    .tv-comparison-table thead,
+    .tv-comparison-table tbody,
+    .tv-comparison-table tr,
+    .tv-comparison-table th,
+    .tv-comparison-table td {
+        display: block;
+    }
+
+    .tv-comparison-table thead {
+        display: none;
+    }
+
+    .tv-comparison-table tr {
+        margin-bottom: var(--space-md);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+    }
+
+    .tv-comparison-table td {
+        text-align: right;
+        padding: 8px 12px;
+    }
+
+    .tv-comparison-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: 600;
+        color: var(--color-text-light);
+    }
+}
+
+@media (max-width: 480px) {
+    .tv-hero__title {
+        font-size: 1.5rem;
+    }
+
+    .tv-stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

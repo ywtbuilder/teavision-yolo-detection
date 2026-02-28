@@ -1,0 +1,4 @@
+# 模型权重目录
+# 请将训练好的 .pt 模型文件放置于此目录后再启动后端服务。
+# 所需文件：tea_best.pt（必须）以及各 scheme .pt 文件（可选）
+# 参考 config.py 中的 AVAILABLE_MODELS 获取完整文件列表。

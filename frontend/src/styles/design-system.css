@@ -1,0 +1,935 @@
+/* ============================================
+   TeaVision V12 | 设计系统
+   Anti-AI 美学 · 手工质感 · 大地色调
+
+   架构：
+   1. 全局重置与排版
+   2. 导航栏
+   3. 移动端抽屉菜单
+   4. 页面布局
+   5. 通用组件（按钮、卡片、表单控件）
+   6. Bento Grid 布局
+   7. 主题切换器浮动按钮
+   8. Toast 通知
+   9. 页脚
+   10. 动画
+   11. 响应式断点
+   ============================================ */
+
+/* === 字体导入 === */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* === CSS 变量（默认主题由 themes.css 覆盖） === */
+:root {
+    --color-primary: #2C2418;
+    --color-accent: #B8956A;
+    --color-bg-light: #FAF8F5;
+    --color-bg-main: #F5F2EE;
+    --color-text: #2C2418;
+    --color-text-light: #8A7E72;
+    --color-border: #E8E2DA;
+    --color-surface: #FFFFFF;
+    --color-success: #6F806D;
+    --color-error: #A8655F;
+    --color-warning: #D0A77A;
+
+    /* 排版 */
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Libre Baskerville', Georgia, serif;
+
+    /* 投影 */
+    --shadow-sm: 0 1px 3px rgba(44, 36, 24, 0.04), 0 1px 2px rgba(44, 36, 24, 0.02);
+    --shadow-md: 0 4px 12px rgba(44, 36, 24, 0.06), 0 2px 4px rgba(44, 36, 24, 0.04);
+    --shadow-lg: 0 12px 32px rgba(44, 36, 24, 0.08), 0 4px 8px rgba(44, 36, 24, 0.04);
+
+    /* 圆角 */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /* 间距 */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    /* 过渡 */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ==================== 1. 全局重置与排版 ==================== */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: var(--color-bg-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s var(--ease-in-out);
+}
+
+a:hover {
+    color: var(--color-primary);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* ==================== 2. 导航栏 ==================== */
+
+.tv-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--navbar-bg, rgba(255, 255, 255, 0.85));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.3s var(--ease-in-out), box-shadow 0.3s var(--ease-in-out);
+}
+
+.tv-navbar.scrolled {
+    box-shadow: var(--shadow-md);
+}
+
+.tv-navbar__inner {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--space-xl) 0 var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+}
+
+.tv-navbar__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    margin-right: auto;
+    flex-shrink: 0;
+}
+
+.tv-navbar__school-logo {
+    flex-shrink: 0;
+}
+
+.tv-navbar__title {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.tv-navbar__subtitle {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--color-text-light);
+    letter-spacing: 0.1em;
+}
+
+.tv-navbar__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-left: var(--space-xl);
+}
+
+.tv-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: var(--radius-md);
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s var(--ease-in-out);
+    white-space: nowrap;
+}
+
+.tv-nav-link:hover {
+    color: var(--color-primary);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.tv-nav-link.active {
+    color: var(--color-primary);
+    background: rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+}
+
+.tv-nav-link__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* 汉堡菜单按钮 */
+.tv-navbar__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.tv-navbar__hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: all 0.3s var(--ease-out);
+}
+
+.tv-navbar__hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.tv-navbar__hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.tv-navbar__hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+
+/* ==================== 3. 移动端抽屉菜单 ==================== */
+
+.tv-drawer {
+    display: none;
+}
+
+.tv-drawer.open {
+    display: block;
+}
+
+.tv-drawer__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1999;
+    animation: fadeIn 0.2s var(--ease-out);
+}
+
+.tv-drawer__content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 80vw;
+    background: var(--color-surface);
+    z-index: 2000;
+    padding: var(--space-xl);
+    overflow-y: auto;
+    animation: slideInRight 0.3s var(--ease-out);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.tv-drawer__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.tv-drawer__link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    transition: all 0.2s var(--ease-in-out);
+}
+
+.tv-drawer__link:hover,
+.tv-drawer__link.active {
+    color: var(--color-primary);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+
+/* ==================== 4. 页面布局 ==================== */
+
+.tv-main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-xl);
+}
+
+.tv-page-header {
+    margin-bottom: var(--space-2xl);
+}
+
+.tv-page-title {
+    font-family: var(--font-sans);
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-primary);
+    line-height: 1.15;
+}
+
+.tv-page-subtitle {
+    font-size: 1.05rem;
+    color: var(--color-text-light);
+    margin-top: var(--space-sm);
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+@media (max-width: 600px) {
+    .tv-page-header {
+        text-align: center;
+    }
+
+    .tv-page-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.tv-section {
+    margin-bottom: var(--space-3xl);
+}
+
+.tv-section__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.02em;
+}
+
+
+/* ==================== 5. 通用组件 ==================== */
+
+/* 按钮 */
+.tv-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-out);
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+.tv-btn--primary {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.tv-btn--primary:hover {
+    filter: brightness(1.15);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.tv-btn--accent {
+    background: var(--color-accent);
+    color: #fff;
+}
+
+.tv-btn--accent:hover {
+    filter: brightness(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.tv-btn--outline {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+.tv-btn--outline:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.tv-btn--sm {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+}
+
+.tv-btn--lg {
+    padding: 14px 28px;
+    font-size: 1rem;
+}
+
+.tv-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* 卡片 */
+.tv-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s var(--ease-out);
+}
+
+.tv-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.tv-card--flat {
+    box-shadow: none;
+}
+
+.tv-card--flat:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.tv-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.01em;
+}
+
+.tv-card__desc {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+/* 统计卡片 */
+.tv-stat-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: all 0.3s var(--ease-out);
+}
+
+.tv-stat-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.tv-stat-card__value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+}
+
+.tv-stat-card__label {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-top: var(--space-xs);
+    font-weight: 500;
+}
+
+/* 输入控件 */
+.tv-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background: var(--color-surface);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.tv-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(184, 149, 106, 0.12);
+}
+
+/* 选择器 */
+.tv-select {
+    appearance: none;
+    padding: 10px 36px 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background: var(--color-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A7E72' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+    cursor: pointer;
+}
+
+/* 滑块 */
+.tv-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-border);
+    outline: none;
+}
+
+.tv-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+    border: 2px solid var(--color-surface);
+    box-shadow: var(--shadow-sm);
+}
+
+/* 拖拽上传区域 */
+.tv-dropzone {
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3xl) var(--space-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-in-out);
+    background: rgba(0, 0, 0, 0.01);
+}
+
+.tv-dropzone:hover,
+.tv-dropzone.dragover {
+    border-color: var(--color-accent);
+    background: rgba(184, 149, 106, 0.04);
+}
+
+.tv-dropzone__icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-md);
+    color: var(--color-text-light);
+}
+
+.tv-dropzone__text {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+
+.tv-dropzone__text strong {
+    color: var(--color-accent);
+}
+
+/* 标签页 */
+.tv-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-xl);
+}
+
+.tv-tab {
+    padding: 10px 18px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s var(--ease-in-out);
+}
+
+.tv-tab:hover {
+    color: var(--color-primary);
+}
+
+.tv-tab.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-accent);
+    font-weight: 600;
+}
+
+/* 加载动画 */
+.tv-spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.tv-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-3xl);
+    color: var(--color-text-light);
+}
+
+/* 徽章 */
+.tv-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.tv-badge--success {
+    background: rgba(111, 128, 109, 0.12);
+    color: var(--color-success);
+}
+
+.tv-badge--warning {
+    background: rgba(208, 167, 122, 0.12);
+    color: var(--color-warning);
+}
+
+.tv-badge--error {
+    background: rgba(168, 101, 95, 0.12);
+    color: var(--color-error);
+}
+
+
+/* ==================== 6. Bento Grid ==================== */
+
+.tv-bento {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+.tv-bento--2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.tv-bento--3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.tv-bento--4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.tv-bento--auto {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.tv-bento__span-2 {
+    grid-column: span 2;
+}
+
+.tv-bento__span-3 {
+    grid-column: span 3;
+}
+
+
+/* ==================== 7. 主题切换器 ====================
+   注：主题切换器按钮、面板、色块预览的样式均定义在 themes.css 中，
+   此处无需重复定义。
+   ========================================================= */
+
+
+/* ==================== 8. Toast 通知 ==================== */
+
+.tv-toast-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tv-toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+    font-size: 0.85rem;
+    color: var(--color-text);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s var(--ease-out);
+}
+
+.tv-toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.tv-toast__icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.tv-toast--success .tv-toast__icon {
+    color: var(--color-success);
+}
+
+.tv-toast--error .tv-toast__icon {
+    color: var(--color-error);
+}
+
+.tv-toast--warning .tv-toast__icon {
+    color: var(--color-warning);
+}
+
+.tv-toast--info .tv-toast__icon {
+    color: var(--color-accent);
+}
+
+
+/* ==================== 9. 页脚（V10 深色背景风格） ==================== */
+
+.tv-footer {
+    background: var(--footer-bg, #4A403A);
+    padding: 1.5rem 0;
+    margin-top: auto;
+}
+
+.tv-footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+    text-align: center;
+}
+
+.tv-footer__brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--footer-text, #FAF8F5);
+    margin-bottom: var(--space-sm);
+}
+
+.tv-footer__links {
+    margin-bottom: var(--space-md);
+}
+
+.tv-footer__link {
+    font-size: 0.85rem;
+    color: var(--footer-text, #FAF8F5);
+    opacity: 0.75;
+}
+
+.tv-footer__link:hover {
+    opacity: 1;
+    color: var(--footer-text, #FAF8F5);
+}
+
+.tv-footer__separator {
+    margin: 0 8px;
+    color: var(--footer-text, #FAF8F5);
+    opacity: 0.4;
+}
+
+.tv-footer__copyright {
+    font-size: 0.75rem;
+    color: var(--footer-text, #FAF8F5);
+    opacity: 0.7;
+}
+
+
+/* ==================== 10. 动画 ==================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.tv-fade-in {
+    animation: fadeIn 0.5s var(--ease-out) both;
+}
+
+.tv-slide-up {
+    animation: slideUp 0.5s var(--ease-out) both;
+}
+
+
+/* ==================== 11. 响应式断点 ==================== */
+
+@media (max-width: 1024px) {
+    .tv-bento--3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tv-bento--4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tv-bento__span-3 {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* 导航栏 */
+    .tv-navbar__links {
+        display: none;
+    }
+
+    .tv-navbar__hamburger {
+        display: flex;
+    }
+
+    .tv-navbar__inner {
+        height: 56px;
+        padding: 0 var(--space-md);
+    }
+
+    /* 页面 */
+    .tv-main {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .tv-page-title {
+        font-size: 1.6rem;
+    }
+
+    /* 网格 */
+    .tv-bento--2,
+    .tv-bento--3,
+    .tv-bento--4 {
+        grid-template-columns: 1fr;
+    }
+
+    .tv-bento__span-2,
+    .tv-bento__span-3 {
+        grid-column: span 1;
+    }
+
+    /* 主题切换器 */
+    .tv-theme-fab {
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .tv-theme-panel {
+        width: 250px;
+    }
+
+    /* 页脚 */
+    .tv-footer {
+        padding: var(--space-lg) 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .tv-page-title {
+        font-size: 1.35rem;
+    }
+
+    .tv-page-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .tv-card {
+        padding: var(--space-lg);
+    }
+}

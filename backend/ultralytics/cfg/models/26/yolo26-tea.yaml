@@ -1,0 +1,77 @@
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
+# YOLO26-Tea: Tea Bud Detection model based on YOLO26 with TBAM and SCGC improvements
+# Based on paper: "YOLO-TBD: Tea Bud Detection with Triple-Branch Attention Mechanism
+# and Self-Correction Group Convolution" (Industrial Crops & Products 226, 2025)
+#
+# Improvements over standard YOLO26:
+# 1. Triple-Branch Attention Mechanism (TBAM) - enhances feature representation
+# 2. Self-Correction Group Convolution (SCGC) via C2fTBAM - enlarges receptive field
+# 3. P2 feature fusion - incorporates low-level features for small object detection
+#
+# Usage:
+#   from ultralytics import YOLO
+#   model = YOLO('yolo26-tea.yaml')
+#   model.train(data='tea.yaml', epochs=150, imgsz=640)
+
+# Parameters
+nc: 80  # number of classes (modify to your dataset, e.g., 1 for tea bud)
+end2end: True  # whether to use end-to-end mode
+reg_max: 1  # DFL bins
+scales: # model compound scaling constants
+  # [depth, width, max_channels]
+  n: [0.50, 0.25, 1024]  # YOLO26-Tea-N
+  s: [0.50, 0.50, 1024]  # YOLO26-Tea-S (recommended for comparison with yolo26s)
+  m: [0.50, 1.00, 512]   # YOLO26-Tea-M
+  l: [1.00, 1.00, 512]   # YOLO26-Tea-L
+  x: [1.00, 1.50, 512]   # YOLO26-Tea-X
+
+# YOLO26-Tea backbone with TBAM attention at each stage
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, Conv, [64, 3, 2]]             # 0-P1/2
+  - [-1, 1, Conv, [128, 3, 2]]            # 1-P2/4
+  - [-1, 2, C3k2, [256, False, 0.25]]     # 2
+  - [-1, 1, TBAM, [256]]                  # 3 <- TBAM attention (P2 stage)
+  - [-1, 1, Conv, [256, 3, 2]]            # 4-P3/8
+  - [-1, 2, C3k2, [512, False, 0.25]]     # 5
+  - [-1, 1, TBAM, [512]]                  # 6 <- TBAM attention (P3 stage)
+  - [-1, 1, Conv, [512, 3, 2]]            # 7-P4/16
+  - [-1, 2, C3k2, [512, True]]            # 8
+  - [-1, 1, TBAM, [512]]                  # 9 <- TBAM attention (P4 stage)
+  - [-1, 1, Conv, [1024, 3, 2]]           # 10-P5/32
+  - [-1, 2, C3k2, [1024, True]]           # 11
+  - [-1, 1, SPPF, [1024, 5, 3, True]]     # 12
+  - [-1, 2, C2PSA, [1024]]                # 13
+
+# YOLO26-Tea head with improved PAFPN (P2 fusion + C2fTBAM)
+head:
+  # Top-down path
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 8], 1, Concat, [1]]             # cat backbone P4 (layer 8)
+  - [-1, 2, C2fTBAM, [512, True]]         # 16 <- C2fTBAM (SCGC + TBAM)
+
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 5], 1, Concat, [1]]             # cat backbone P3 (layer 5)
+  - [-1, 2, C2fTBAM, [256, True]]         # 19 (P3/8-small) <- C2fTBAM
+
+  # P2 feature fusion (improvement for small object detection)
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 2], 1, Concat, [1]]             # cat backbone P2 (layer 2)
+  - [-1, 2, C3k2, [128, True]]            # 22 (P2/4-xsmall) <- new detection layer
+
+  # Bottom-up path
+  - [-1, 1, Conv, [128, 3, 2]]
+  - [[-1, 19], 1, Concat, [1]]            # cat head P3
+  - [-1, 2, C2fTBAM, [256, True]]         # 25 (P3/8-small) <- C2fTBAM
+
+  - [-1, 1, Conv, [256, 3, 2]]
+  - [[-1, 16], 1, Concat, [1]]            # cat head P4
+  - [-1, 2, C2fTBAM, [512, True]]         # 28 (P4/16-medium) <- C2fTBAM
+
+  - [-1, 1, Conv, [512, 3, 2]]
+  - [[-1, 13], 1, Concat, [1]]            # cat head P5
+  - [-1, 1, C3k2, [1024, True, 0.5, True]] # 31 (P5/32-large)
+
+  # Detect head: P2, P3, P4, P5 (4-scale detection for small tea buds)
+  - [[22, 25, 28, 31], 1, Detect, [nc]]   # Detect(P2, P3, P4, P5)
